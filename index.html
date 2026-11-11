@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unidad 7 – Ajuste de curvas</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <!-- ============================
+       NAVEGACIÓN PRINCIPAL
+       ============================ -->
+  <nav class="navegacion" aria-label="Navegación principal">
+    <ul>
+      <li><a href="#portada">Inicio</a></li>
+      <li><a href="#referencias">Referencias</a></li>
+      <li><a href="#fundamentos">Fundamentos</a></li>
+      <li><a href="#renal">Enfermedad renal</a></li>
+      <li><a href="#resistencia">Resistencia antibiótica</a></li>
+      <li><a href="#conexiones">Conexiones</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================
+       SECCIÓN 1 - PORTADA
+       ============================ -->
+  <header class="portada" id="portada">
+    <h1>Unidad 7. Ajuste de curvas</h1>
+    <h2>Aplicaciones de machine learning y algoritmos de optimización en sistemas computacionales</h2>
+    <p>
+      El ajuste de curvas es un procedimiento matemático que permite encontrar la función que mejor
+      describe un conjunto de datos experimentales. Esta técnica, fundamental en ingeniería y ciencias,
+      ha evolucionado desde los métodos clásicos de optimización hasta los modernos algoritmos de
+      aprendizaje automático que hoy se aplican en áreas como la salud y los sistemas computacionales.
+      El presente trabajo analiza tres referencias académicas que ilustran esta evolución.
+    </p>
+  </header>
+
+  <main>
+
+    <!-- ============================
+         SECCIÓN 2 - REFERENCIAS
+         ============================ -->
+    <section id="referencias" class="seccion-blanca">
+      <div class="seccion">
+        <h3 class="titulo-seccion">Referencias utilizadas</h3>
+        <p>Este trabajo se fundamenta en los siguientes tres artículos académicos:</p>
+
+        <div class="referencia">
+          <strong>1.</strong> Tejada, D. A. (2025). Desarrollo y optimización de modelos predictivos
+          de machine learning para pacientes con enfermedad renal crónica. <em>Alerta, 8</em>(4),
+          354-365. <a href="https://revista.uisrael.edu.ec/index.php/ro/article/view/442/375?classId=b6e3d484-9983-4e31-b9e9-61d27f041627&assignmentId=1b2e578b-6a08-4249-909e-dea150ea913f&submissionId=19cf8bb0-5279-49d8-1fd5-89eadf3f1ae7" target="_blank" rel="noopener">Ver artículo completo</a>
+        </div>
+
+        <div class="referencia">
+          <strong>2.</strong> Rodríguez Núñez, O. (2025). Aplicación de machine learning para la
+          predicción de resistencia antibiótica en infecciones intraabdominales en pacientes
+          hospitalizados. [Trabajo de fin de máster, Universitat Autònoma de Barcelona].
+          <a href="https://ddd.uab.cat/pub/trerecpro/2025/322961/RodriguezNunezOlgaTFM.pdf?classId=b6e3d484-9983-4e31-b9e9-61d27f041627&assignmentId=1b2e578b-6a08-4249-909e-dea150ea913f&submissionId=19cf8bb0-5279-49d8-1fd5-89eadf3f1ae7" target="_blank" rel="noopener">Ver documento completo</a>
+        </div>
+
+        <div class="referencia">
+          <strong>3.</strong> Caceci, M. S., &amp; Cacheris, W. P. (1984). Fitting Curves to Data:
+          The Simplex Algorithm. <em>BYTE Magazine, 9</em>(5), 340-362.
+          <a href="https://www.researchgate.net/profile/Marco-Caceci-2/publication/246199710_Fitting_curves_to_data_The_simplex_algorithm_is_the_answer/links/62515624d726197cfd482026/Fitting-curves-to-data-The-simplex-algorithm-is-the-answer.pdf?classId=b6e3d484-9983-4e31-b9e9-61d27f041627&assignmentId=1b2e578b-6a08-4249-909e-dea150ea913f&submissionId=19cf8bb0-5279-49d8-1fd5-89eadf3f1ae7" target="_blank" rel="noopener">Ver artículo completo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+         SECCIÓN 3 - FUNDAMENTOS DEL AJUSTE DE CURVAS
+         ============================ -->
+    <section id="fundamentos" class="seccion-alt">
+      <div class="seccion">
+        <h3 class="titulo-seccion">Fundamentos del ajuste de curvas</h3>
+        <p><em>Basado en Caceci &amp; Cacheris (1984)</em></p>
+
+        <h4 class="subtitulo">¿Qué es el ajuste de curvas?</h4>
+        <p>
+          El ajuste de curvas consiste en encontrar los parámetros de una función matemática que
+          minimicen la diferencia entre los valores predichos por dicha función y los datos
+          experimentales observados. Se busca que la curva teórica se aproxime lo más posible a los
+          puntos de datos reales, generalmente minimizando la suma de los cuadrados de las diferencias
+          (método de mínimos cuadrados).
+        </p>
+
+        <h4 class="subtitulo">El algoritmo Simplex (Nelder-Mead, 1965)</h4>
+        <p>
+          El algoritmo Simplex, propuesto originalmente por Nelder y Mead en 1965, es un método de
+          optimización que no requiere calcular derivadas. Opera construyendo una figura geométrica
+          llamada <strong>simplex</strong>: un triángulo en dos dimensiones o un tetraedro en tres
+          dimensiones. En general, para <em>n</em> parámetros se utiliza un polígono de
+          <em>n + 1</em> vértices.
+        </p>
+
+        <!-- Figura: superficie de respuesta -->
+        <figure class="figura">
+          <img src="imagenes/simplex_superficie.jpeg"
+               alt="Superficie de respuesta SSR en función de los parámetros a y b, mostrando el mínimo que el algoritmo Simplex busca alcanzar">
+          <figcaption>Figura 2 (Caceci &amp; Cacheris, 1984). Representación de la superficie de respuesta SS<sub>R</sub> en función de los parámetros <em>a</em> y <em>b</em>. El mínimo de esta superficie corresponde a los mejores valores de los parámetros.</figcaption>
+        </figure>
+
+        <p>
+          El algoritmo funciona evaluando la función objetivo en cada vértice del simplex y realizando
+          movimientos geométricos para desplazar la figura hacia la región del espacio donde se
+          encuentra el mínimo. Estos movimientos son cuatro:
+        </p>
+
+        <!-- Botones interactivos para los movimientos -->
+        <div class="movimientos-contenedor">
+          <p><strong>Haz clic en cada movimiento para ver su explicación:</strong></p>
+
+          <div class="movimiento-item">
+            <button class="boton btn-movimiento" data-panel="panel-reflexion">
+              1. Reflexión
+            </button>
+            <div id="panel-reflexion" class="panel-detalle panel-movimiento">
+              <strong>Reflexión:</strong> Se toma el peor vértice del simplex (el que tiene el valor
+              más alto de la función objetivo) y se refleja a través del centroide de los demás
+              vértices. Es como "empujar" el peor punto hacia el lado opuesto del simplex, esperando
+              encontrar una mejor solución. Es el movimiento más básico y frecuente.
+            </div>
+          </div>
+
+          <div class="movimiento-item">
+            <button class="boton btn-movimiento" data-panel="panel-expansion">
+              2. Expansión
+            </button>
+            <div id="panel-expansion" class="panel-detalle panel-movimiento">
+              <strong>Expansión:</strong> Si la reflexión produjo un resultado muy bueno (mejor que
+              el mejor vértice actual), se intenta ir más lejos en la misma dirección. El simplex se
+              "estira" para explorar si aún más adelante hay una solución todavía mejor. Es un
+              movimiento optimista que permite acelerar la convergencia.
+            </div>
+          </div>
+
+          <div class="movimiento-item">
+            <button class="boton btn-movimiento" data-panel="panel-contraccion">
+              3. Contracción
+            </button>
+            <div id="panel-contraccion" class="panel-detalle panel-movimiento">
+              <strong>Contracción:</strong> Si la reflexión no mejoró la situación, se contrae el
+              simplex acercando el peor vértice hacia el centroide. El simplex se "encoge"
+              parcialmente, reduciendo su tamaño para buscar con más detalle en la zona actual. Se
+              usa cuando el simplex ya está cerca del mínimo.
+            </div>
+          </div>
+
+          <div class="movimiento-item">
+            <button class="boton btn-movimiento" data-panel="panel-contraccion-total">
+              4. Contracción total
+            </button>
+            <div id="panel-contraccion-total" class="panel-detalle panel-movimiento">
+              <strong>Contracción total (shrink):</strong> Cuando ninguno de los movimientos
+              anteriores funciona, todos los vértices se acercan hacia el mejor vértice actual. El
+              simplex se reduce de tamaño drásticamente. Es un último recurso que se aplica pocas
+              veces durante la optimización, pero garantiza que el algoritmo no diverge.
+            </div>
+          </div>
+        </div>
+
+        <!-- Figura: movimientos del simplex -->
+        <figure class="figura">
+          <img src="imagenes/simplex_movimientos.jpeg"
+               alt="Diagrama de un simplex bidimensional mostrando los cuatro movimientos: reflexión (R), expansión (E), contracción (C) y contracción total (S)">
+          <figcaption>Figura 3 (Caceci &amp; Cacheris, 1984). Simplex bidimensional BWO ilustrando los cuatro mecanismos de movimiento: reflexión, expansión, contracción y contracción total. B = mejor vértice, W = peor vértice, R = vértice reflejado, E = vértice expandido, C = vértice contraído, S = vértices de contracción total.</figcaption>
+        </figure>
+
+        <h4 class="subtitulo">Ventajas del algoritmo Simplex</h4>
+        <ul>
+          <li><strong>No diverge:</strong> el algoritmo siempre converge hacia una solución, a
+            diferencia de otros métodos que pueden oscilar o alejarse del óptimo.</li>
+          <li><strong>No requiere derivadas:</strong> no es necesario calcular gradientes ni
+            jacobianas, lo que lo hace útil para funciones complejas o no diferenciables.</li>
+          <li><strong>Sin operaciones matriciales:</strong> su implementación es sencilla, ya que no
+            necesita inversiones de matrices ni álgebra lineal avanzada.</li>
+        </ul>
+
+        <h4 class="subtitulo">Ejemplo clásico: ecuación de Michaelis-Menten</h4>
+        <p>
+          Caceci y Cacheris (1984) utilizaron como ejemplo la ecuación de Michaelis-Menten, que
+          describe la velocidad de reacciones enzimáticas:
+        </p>
+        <div class="ecuacion">
+          y = a · x / (b + x)
+        </div>
+        <p>
+          Donde <em>a</em> representa la velocidad máxima de la reacción y <em>b</em> es la
+          constante de Michaelis (la concentración de sustrato a la cual la velocidad es la mitad
+          de la máxima). El algoritmo Simplex se utiliza para encontrar los valores óptimos de
+          <em>a</em> y <em>b</em> que mejor se ajustan a los datos experimentales.
+        </p>
+
+        <h4 class="subtitulo">Implementación en Pascal</h4>
+        <p>
+          Los autores publicaron un programa llamado <strong>"Simp"</strong>, escrito en el lenguaje
+          Pascal, que implementaba el algoritmo Simplex para ajustar curvas a datos experimentales.
+          Este programa fue uno de los primeros en hacer accesible este método de optimización a
+          investigadores y estudiantes con computadoras personales de la época.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================
+         SECCIÓN 4 - ENFERMEDAD RENAL CRÓNICA
+         ============================ -->
+    <section id="renal" class="seccion-blanca">
+      <div class="seccion">
+        <h3 class="titulo-seccion">Machine learning aplicado a la salud: enfermedad renal crónica</h3>
+        <p><em>Basado en Tejada (2025)</em></p>
+
+        <h4 class="subtitulo">Resumen del estudio</h4>
+        <p>
+          <strong>Objetivo:</strong> Desarrollar y optimizar modelos predictivos de machine learning
+          para identificar pacientes con enfermedad renal crónica (ERC) a partir de datos clínicos y
+          demográficos.
+        </p>
+        <p>
+          <strong>Metodología:</strong> Se utilizó un diseño analítico de corte transversal con datos
+          de 400 pacientes. Se evaluaron cuatro algoritmos de aprendizaje automático y se aplicaron
+          técnicas de ajuste de hiperparámetros y validación cruzada para optimizar el rendimiento de
+          cada modelo.
+        </p>
+        <p>
+          <strong>Conclusión:</strong> Los modelos de Bosque Aleatorio y Árbol de Decisiones
+          alcanzaron un desempeño superior, con exactitudes cercanas al 99%, demostrando el potencial
+          del machine learning como herramienta de apoyo al diagnóstico clínico.
+        </p>
+
+        <h4 class="subtitulo">Comparación de modelos evaluados</h4>
+        <p>Haz clic en cada fila para ver un resumen del modelo:</p>
+
+        <!-- Figuras: curvas ROC del artículo de Tejada -->
+        <div class="figuras-grid">
+          <figure class="figura">
+            <img src="imagenes/renal_p5_img1.png"
+                 alt="Curvas ROC comparando el rendimiento de los cuatro modelos de machine learning para enfermedad renal crónica">
+            <figcaption>Figura 1 (Tejada, 2025). Curvas ROC de los modelos iniciales: SVM (AUC=0.92), Bosque Aleatorio (AUC=0.90), Regresión Logística (AUC=0.85) y Árbol de Decisiones (AUC=0.68).</figcaption>
+          </figure>
+          <figure class="figura">
+            <img src="imagenes/renal_p6_img2.png"
+                 alt="Curvas ROC comparando el rendimiento de los modelos de árbol de decisiones según su nivel de optimización">
+            <figcaption>Figura 2 (Tejada, 2025). Mejora progresiva del modelo de Árbol de Decisiones mediante optimización de hiperparámetros, alcanzando AUC=1.0 con técnicas avanzadas.</figcaption>
+          </figure>
+        </div>
+
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo</th>
+                <th>Exactitud</th>
+                <th>Sensibilidad</th>
+                <th>Especificidad</th>
+                <th>AUC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila-clickable fila-modelo" data-detalle="detalle-rl">
+                <td>Regresión Logística</td>
+                <td>96.25%</td>
+                <td>95.83%</td>
+                <td>96.88%</td>
+                <td>0.99</td>
+              </tr>
+              <tr class="fila-clickable fila-modelo" data-detalle="detalle-svm">
+                <td>SVM</td>
+                <td>98.13%</td>
+                <td>97.50%</td>
+                <td>98.44%</td>
+                <td>0.99</td>
+              </tr>
+              <tr class="fila-clickable fila-modelo" data-detalle="detalle-rf">
+                <td>Bosque Aleatorio</td>
+                <td>99.38%</td>
+                <td>99.17%</td>
+                <td>100%</td>
+                <td>1.00</td>
+              </tr>
+              <tr class="fila-clickable fila-modelo" data-detalle="detalle-dt">
+                <td>Árbol de Decisiones</td>
+                <td>99.38%</td>
+                <td>99.17%</td>
+                <td>100%</td>
+                <td>0.99</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paneles de detalle de cada modelo -->
+        <div id="detalle-rl" class="panel-detalle panel-detalle-modelo">
+          <strong>Regresión Logística:</strong> Es un modelo estadístico clásico que estima la
+          probabilidad de que un paciente tenga ERC en función de las variables clínicas. Obtuvo una
+          exactitud del 96.25%, siendo el modelo con menor rendimiento del grupo pero aún con un
+          desempeño destacable. Su AUC de 0.99 indica una excelente capacidad de discriminación.
+          Es un modelo interpretable y sirve como línea base para comparar con los demás.
+        </div>
+
+        <div id="detalle-svm" class="panel-detalle panel-detalle-modelo">
+          <strong>Máquinas de Vectores de Soporte (SVM):</strong> Busca el hiperplano que mejor
+          separa a los pacientes con y sin ERC. Alcanzó un 98.13% de exactitud con una especificidad
+          del 98.44%, lo que indica que es muy bueno identificando a los pacientes sanos. Su AUC de
+          0.99 confirma un rendimiento robusto. Es adecuado para problemas de clasificación binaria
+          con datos de dimensión moderada.
+        </div>
+
+        <div id="detalle-rf" class="panel-detalle panel-detalle-modelo">
+          <strong>Bosque Aleatorio (Random Forest):</strong> Combina múltiples árboles de decisión
+          entrenados con subconjuntos aleatorios de datos. Logró el mejor rendimiento global con
+          99.38% de exactitud, 100% de especificidad y un AUC perfecto de 1.00. Es robusto frente
+          al sobreajuste y permite identificar la importancia relativa de cada variable predictora.
+          Fue el modelo recomendado por el estudio.
+        </div>
+
+        <div id="detalle-dt" class="panel-detalle panel-detalle-modelo">
+          <strong>Árbol de Decisiones:</strong> Genera un diagrama de flujo con reglas de decisión
+          basadas en las variables clínicas. Igualó al Bosque Aleatorio en exactitud (99.38%) y
+          especificidad (100%). Su principal ventaja es la interpretabilidad: el árbol resultante
+          puede visualizarse y entenderse fácilmente por profesionales de la salud, facilitando la
+          toma de decisiones clínicas.
+        </div>
+
+        <!-- Figura: árbol de decisiones -->
+        <figure class="figura">
+          <img src="imagenes/renal_p7_img3.png"
+               alt="Árbol de decisiones optimizado para clasificación de enfermedad renal crónica, mostrando las variables sexo masculino, hipertensión arterial, consumo de frutas/verduras y exposición a plaguicidas">
+          <figcaption>Figura 3 (Tejada, 2025). Árbol de decisiones con optimización de hiperparámetros. Las variables principales de decisión son: sexo masculino, hipertensión arterial, consumo de frutas y verduras, y exposición crónica a plaguicidas.</figcaption>
+        </figure>
+
+        <h4 class="subtitulo">Factores determinantes identificados</h4>
+        <p>
+          El estudio identificó tres factores con mayor influencia en la predicción de la enfermedad
+          renal crónica:
+        </p>
+        <ul>
+          <li><strong>Sexo masculino:</strong> los hombres presentaron mayor riesgo de desarrollar
+            ERC.</li>
+          <li><strong>Hipertensión arterial:</strong> es un factor de riesgo reconocido que daña
+            progresivamente los vasos sanguíneos renales.</li>
+          <li><strong>Exposición a plaguicidas:</strong> factor ambiental relevante, especialmente
+            en poblaciones rurales y agrícolas.</li>
+        </ul>
+
+        <h4 class="subtitulo">Técnicas de optimización utilizadas</h4>
+        <ul>
+          <li><strong>Ajuste de hiperparámetros:</strong> se probaron distintas configuraciones de
+            cada modelo (por ejemplo, número de árboles en Random Forest, tipo de kernel en SVM)
+            para encontrar la combinación que maximiza el rendimiento.</li>
+          <li><strong>Validación cruzada:</strong> se dividió el conjunto de datos en múltiples
+            subconjuntos para entrenar y evaluar el modelo de forma repetida, garantizando que los
+            resultados sean generalizables y no dependan de una partición particular de los datos.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================
+         SECCIÓN 5 - RESISTENCIA ANTIBIÓTICA
+         ============================ -->
+    <section id="resistencia" class="seccion-alt">
+      <div class="seccion">
+        <h3 class="titulo-seccion">Predicción de resistencia antibiótica</h3>
+        <p><em>Basado en Rodríguez Núñez (2025)</em></p>
+
+        <h4 class="subtitulo">El problema de los microorganismos resistentes</h4>
+        <p>
+          Los microorganismos resistentes a antibióticos (MRA) representan una de las amenazas más
+          graves para la salud pública mundial. En el contexto de las infecciones intraabdominales
+          (IIA), la resistencia antibiótica dificulta el tratamiento empírico inicial: si el
+          antibiótico elegido no es efectivo contra la bacteria causante, el paciente puede empeorar
+          significativamente. Por ello, predecir la resistencia antes de tener los resultados del
+          cultivo microbiológico podría salvar vidas.
+        </p>
+
+        <h4 class="subtitulo">Modelos evaluados</h4>
+
+        <!-- Figura: diagrama de flujo del procesamiento de datos -->
+        <figure class="figura">
+          <img src="imagenes/ml_p6_img2.png"
+               alt="Diagrama de flujo del procesamiento de datos clínicos: desde 1647 registros iniciales, eliminación de duplicados, preprocesado, generación de datos sintéticos, hasta la división train/test">
+          <figcaption>Figura 1 (Rodríguez Núñez, 2025). Diagrama de flujo del procesamiento de datos clínicos: desde la recopilación inicial de 1,647 registros hasta la división en conjuntos de entrenamiento (80%) y prueba (20%).</figcaption>
+        </figure>
+
+        <p>
+          El estudio evaluó seis modelos de machine learning para predecir si el microorganismo
+          causante de la infección sería resistente a los antibióticos habituales:
+        </p>
+        <ul>
+          <li><strong>Regresión Logística:</strong> modelo estadístico clásico como referencia.</li>
+          <li><strong>Random Forest:</strong> conjunto de árboles de decisión.</li>
+          <li><strong>XGBoost:</strong> algoritmo de gradient boosting optimizado.</li>
+          <li><strong>CatBoost:</strong> variante de boosting que maneja bien variables categóricas.
+          </li>
+          <li><strong>Stacking 3c:</strong> modelo ensamblado que combina tres clasificadores base.
+          </li>
+          <li><strong>Stacking 4c:</strong> modelo ensamblado que combina cuatro clasificadores base.
+          </li>
+        </ul>
+
+        <h4 class="subtitulo">Resultados principales</h4>
+
+        <!-- Figuras: curvas ROC y matrices de confusión -->
+        <div class="figuras-grid">
+          <figure class="figura">
+            <img src="imagenes/ml_p8_img3.png"
+                 alt="Curvas ROC de los cuatro modelos base: Regresión Logística, Random Forest, XGBoost y CatBoost para detección de MRA">
+            <figcaption>Figura 2 (Rodríguez Núñez, 2025). Curvas ROC de los modelos base para detección de MRA: CatBoost (AUC=0.72) tiene el mejor desempeño, seguido de XGBoost y RF (AUC=0.70).</figcaption>
+          </figure>
+          <figure class="figura">
+            <img src="imagenes/ml_p8_img5.png"
+                 alt="Matrices de confusión de los modelos Regresión Logística y Random Forest con umbral 0.2">
+            <figcaption>Figura 2b (Rodríguez Núñez, 2025). Matrices de confusión de Regresión Logística y Random Forest con umbral 0.2, mostrando la distribución de verdaderos/falsos positivos y negativos.</figcaption>
+          </figure>
+        </div>
+        <div class="tabla-contenedor">
+          <table>
+            <thead>
+              <tr>
+                <th>Modelo</th>
+                <th>AUC</th>
+                <th>Recall</th>
+                <th>F1-Score</th>
+                <th>Precisión</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Regresión Logística</td>
+                <td>0.69</td>
+                <td>0.68</td>
+                <td>0.52</td>
+                <td>0.42</td>
+              </tr>
+              <tr>
+                <td>Random Forest</td>
+                <td>0.71</td>
+                <td>0.52</td>
+                <td>0.50</td>
+                <td>0.48</td>
+              </tr>
+              <tr>
+                <td>XGBoost</td>
+                <td>0.72</td>
+                <td>0.54</td>
+                <td>0.52</td>
+                <td>0.49</td>
+              </tr>
+              <tr>
+                <td>CatBoost</td>
+                <td>0.72</td>
+                <td>0.58</td>
+                <td>0.53</td>
+                <td>0.49</td>
+              </tr>
+              <tr>
+                <td>Stacking 3c</td>
+                <td>0.72</td>
+                <td>0.70</td>
+                <td>0.53</td>
+                <td>0.43</td>
+              </tr>
+              <tr>
+                <td>Stacking 4c</td>
+                <td>0.72</td>
+                <td>0.62</td>
+                <td>0.53</td>
+                <td>0.46</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="subtitulo">Variables predictoras clave</h4>
+        <p>
+          Los factores que más influyen en la predicción de resistencia antibiótica fueron:
+        </p>
+        <ul>
+          <li><strong>Uso previo de antibióticos:</strong> pacientes que recibieron antibióticos
+            antes del ingreso tienen mayor probabilidad de albergar bacterias resistentes.</li>
+          <li><strong>Edad del paciente:</strong> los pacientes de mayor edad tienden a presentar
+            infecciones con mayor resistencia.</li>
+          <li><strong>Días de ingreso hospitalario:</strong> a mayor estancia hospitalaria, mayor
+            exposición a bacterias resistentes propias del ambiente hospitalario.</li>
+        </ul>
+
+        <h4 class="subtitulo">Conclusión clínica</h4>
+
+        <!-- Figuras: importancia de variables y curvas ROC del stacking -->
+        <div class="figuras-grid">
+          <figure class="figura">
+            <img src="imagenes/ml_p9_img9.png"
+                 alt="Gráfico de importancia de variables del modelo XGBoost mostrando que NUM_ATB (número de antibióticos previos) es la variable más importante">
+            <figcaption>Figura 4 (Rodríguez Núñez, 2025). Importancia de variables por permutación en XGBoost: el número de antibióticos previos (NUM_ATB) es el predictor dominante de resistencia.</figcaption>
+          </figure>
+          <figure class="figura">
+            <img src="imagenes/ml_p10_img13.png"
+                 alt="Importancia de variables del modelo Stacking 3c mostrando NUM_ATB, edad y días de ingreso como las tres variables principales">
+            <figcaption>Figura 5 (Rodríguez Núñez, 2025). Importancia de variables en Stacking 3c: NUM_ATB, edad y días de ingreso son las variables más relevantes para predecir MRA.</figcaption>
+          </figure>
+        </div>
+
+        <figure class="figura">
+          <img src="imagenes/ml_p10_img15.png"
+               alt="Curvas ROC comparando los modelos Stacking 3c (AUC=0.70) y Stacking 4c (AUC=0.71) para detección de MRA">
+          <figcaption>Figura 6 (Rodríguez Núñez, 2025). Curvas ROC de los modelos Stacking: Stacking 3c (AUC=0.70) vs Stacking 4c (AUC=0.71). Aunque el 4c tiene un AUC ligeramente mayor, el 3c es preferido por su mayor sensibilidad.</figcaption>
+        </figure>
+        <p>
+          El modelo <strong>Stacking 3c</strong> fue seleccionado como el más adecuado para uso
+          clínico, ya que prioriza la <strong>sensibilidad (recall = 0.70)</strong> sobre la
+          precisión. En el contexto médico, es más importante detectar correctamente a los pacientes
+          con bacterias resistentes (aunque se generen algunas falsas alarmas) que pasar por alto
+          casos positivos, lo cual podría tener consecuencias graves para el paciente.
+        </p>
+
+        <!-- Quiz de reflexión -->
+        <div class="quiz-contenedor">
+          <h4>Pregunta de reflexión</h4>
+          <p>¿Por qué en el contexto clínico de resistencia antibiótica se prefiere un modelo con
+            alta sensibilidad (recall) aunque tenga menor precisión?</p>
+
+          <label class="quiz-opcion">
+            <input type="radio" name="quiz-resistencia" value="precision">
+            Porque la precisión no importa en medicina.
+          </label>
+
+          <label class="quiz-opcion">
+            <input type="radio" name="quiz-resistencia" value="stacking">
+            Porque es preferible detectar todos los casos positivos (aunque haya falsas alarmas)
+            a dejar pasar un paciente con bacteria resistente sin tratamiento adecuado.
+          </label>
+
+          <label class="quiz-opcion">
+            <input type="radio" name="quiz-resistencia" value="velocidad">
+            Porque los modelos con alta sensibilidad son más rápidos de entrenar.
+          </label>
+
+          <label class="quiz-opcion">
+            <input type="radio" name="quiz-resistencia" value="costo">
+            Porque la sensibilidad reduce el costo computacional del modelo.
+          </label>
+
+          <button class="boton" id="btn-verificar-quiz">Verificar respuesta</button>
+
+          <div id="quiz-correcto" class="quiz-resultado quiz-correcto">
+            <strong>¡Correcto!</strong> En medicina, un falso negativo (no detectar una bacteria
+            resistente) puede significar que el paciente reciba un tratamiento ineficaz, con
+            consecuencias potencialmente graves. Por eso se prefiere un modelo que "alerte de más"
+            (falsos positivos) antes que uno que deje pasar casos reales.
+          </div>
+
+          <div id="quiz-incorrecto" class="quiz-resultado quiz-incorrecto">
+            <strong>Incorrecto.</strong> Piensa en las consecuencias de no detectar a un paciente
+            con bacteria resistente: recibiría un antibiótico que no funciona. En contextos clínicos,
+            la sensibilidad (no dejar pasar casos positivos) tiene prioridad sobre la precisión.
+            Intenta de nuevo.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+         SECCIÓN 6 - CONEXIONES Y APLICACIONES
+         ============================ -->
+    <section id="conexiones" class="seccion-blanca">
+      <div class="seccion">
+        <h3 class="titulo-seccion">Conexiones y aplicaciones en sistemas computacionales</h3>
+
+        <h4 class="subtitulo">Del ajuste clásico al machine learning moderno</h4>
+        <p>
+          Los tres artículos analizados muestran una línea evolutiva clara: el ajuste de curvas
+          clásico y el machine learning moderno comparten la misma base conceptual. Ambos buscan
+          minimizar una función de error para encontrar los parámetros óptimos de un modelo. La
+          diferencia principal radica en la complejidad de los modelos y la cantidad de datos que
+          pueden procesar.
+        </p>
+
+        <!-- Línea de tiempo -->
+        <div class="linea-tiempo">
+          <div class="evento-tiempo">
+            <strong>1965 – Algoritmo Simplex (Nelder-Mead)</strong>
+            <p>Se publica el método de optimización que permite encontrar mínimos de funciones sin
+              calcular derivadas. Fundamento de muchos métodos numéricos posteriores.</p>
+          </div>
+          <div class="evento-tiempo">
+            <strong>1984 – Programa "Simp" (Caceci &amp; Cacheris)</strong>
+            <p>Se democratiza el uso del Simplex al publicar un programa en Pascal accesible en
+              computadoras personales. Se aplica al ajuste de la ecuación de Michaelis-Menten.</p>
+          </div>
+          <div class="evento-tiempo">
+            <strong>2025 – Modelos predictivos en salud (Tejada; Rodríguez Núñez)</strong>
+            <p>Se utilizan algoritmos avanzados (Random Forest, XGBoost, Stacking) con ajuste de
+              hiperparámetros y validación cruzada para predecir enfermedades y resistencia
+              antibiótica. La optimización sigue siendo el corazón de estos métodos.</p>
+          </div>
+        </div>
+
+        <h4 class="subtitulo">Aplicaciones en sistemas computacionales</h4>
+        <p>
+          Las técnicas de ajuste de curvas y optimización tienen aplicaciones directas en los
+          sistemas computacionales modernos:
+        </p>
+        <ul>
+          <li><strong>Optimización de hiperparámetros:</strong> al entrenar un modelo de ML, se
+            deben ajustar parámetros como la tasa de aprendizaje, el número de árboles o la
+            profundidad máxima. Esto es, en esencia, un problema de ajuste de curvas: encontrar los
+            valores que minimizan el error de predicción.</li>
+          <li><strong>Funciones de pérdida:</strong> todos los algoritmos de machine learning buscan
+            minimizar una función de pérdida (loss function), exactamente como el Simplex busca el
+            mínimo de la suma de cuadrados. Los métodos modernos como el descenso de gradiente son
+            análogos conceptuales del Simplex.</li>
+          <li><strong>Validación y evaluación:</strong> las métricas utilizadas (AUC, recall,
+            F1-score, exactitud) son herramientas estándar en sistemas computacionales para evaluar
+            la calidad del ajuste de un modelo a los datos.</li>
+          <li><strong>Ingeniería de software:</strong> la implementación de estos algoritmos requiere
+            buenas prácticas de programación, manejo eficiente de datos y comprensión de las
+            estructuras de datos subyacentes.</li>
+        </ul>
+
+        <h4 class="subtitulo">Reflexión final</h4>
+        <p>
+          El estudio del ajuste de curvas no es solo un tema histórico: es la base sobre la cual se
+          construyen los sistemas de inteligencia artificial actuales. Comprender los principios del
+          algoritmo Simplex ayuda a entender por qué los modelos modernos de ML necesitan
+          optimización, cómo funcionan internamente los procesos de entrenamiento y por qué la
+          selección cuidadosa de hiperparámetros es crucial para obtener buenos resultados. En un
+          mundo cada vez más dependiente de los datos, estas habilidades son esenciales para
+          cualquier profesional de los sistemas computacionales.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================
+       SECCIÓN 7 - PIE DE PÁGINA
+       ============================ -->
+  <footer class="pie-pagina">
+    <p>Trabajo realizado para la <strong>Unidad 7. Ajuste de curvas</strong></p>
+    <p>Noviembre 2026</p>
+    <div class="integrantes">
+      <p>Integrantes del equipo:</p>
+      <p>1. Flores Hernández Mía</p>
+      <p>2. Hernández Ramos Rodolfo</p>
+      <p>3. Vega Pérez José Emanuel</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript para interactividad -->
+  <script src="js.js"></script>
+
+</body>
+</html>
