@@ -9,32 +9,32 @@ document.addEventListener('DOMContentLoaded', function () {
   // -----------------------------------------------
   // 1. Mostrar/ocultar movimientos del Simplex
   // -----------------------------------------------
-  var botonesMovimiento = document.querySelectorAll('.btn-movimiento');
+  var botonesMovimiento = document.querySelectorAll('.movimientos-container button, .btn-movimiento');
+  var panelesMovimiento = document.querySelectorAll('#panel-reflexion, #panel-expansion, #panel-contraccion, #panel-contraccion-total');
 
   botonesMovimiento.forEach(function (boton) {
     boton.addEventListener('click', function () {
       var idPanel = this.getAttribute('data-panel');
       var panel = document.getElementById(idPanel);
 
-      if (panel) {
-        // Cerrar todos los paneles de movimientos primero
-        var todosLosPaneles = document.querySelectorAll('.panel-movimiento');
-        todosLosPaneles.forEach(function (p) {
-          if (p.id !== idPanel) {
-            p.classList.remove('visible');
-          }
-        });
+      if (!panel) return;
 
-        // Alternar el panel seleccionado
-        panel.classList.toggle('visible');
+      var yaVisible = panel.classList.contains('visible');
 
-        // Actualizar estado de botones
-        botonesMovimiento.forEach(function (b) {
-          b.classList.remove('activo');
-        });
-        if (panel.classList.contains('visible')) {
-          this.classList.add('activo');
-        }
+      // Cerrar todos los paneles de movimientos
+      panelesMovimiento.forEach(function (p) {
+        p.classList.remove('visible');
+      });
+
+      // Quitar clase activa de todos los botones de movimiento
+      botonesMovimiento.forEach(function (b) {
+        b.classList.remove('activo');
+      });
+
+      // Si no estaba visible, abrir el seleccionado y activar el botón
+      if (!yaVisible) {
+        panel.classList.add('visible');
+        this.classList.add('activo');
       }
     });
   });
