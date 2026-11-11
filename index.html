@@ -9,7 +9,7 @@
 <body>
 
   <!-- ============================
-       NAVEGACIÓN PRINCIPAL
+       NAVEGACIÓN PRI
        ============================ -->
   <nav class="navegacion" aria-label="Navegación principal">
     <ul>
@@ -94,12 +94,14 @@
           <em>n + 1</em> vértices.
         </p>
 
-        <!-- Figura: superficie de respuesta -->
-        <figure class="figura">
-          <img src="imagenes/simplex_superficie.jpeg"
-               alt="Superficie de respuesta SSR en función de los parámetros a y b, mostrando el mínimo que el algoritmo Simplex busca alcanzar">
-          <figcaption>Figura 2 (Caceci &amp; Cacheris, 1984). Representación de la superficie de respuesta SS<sub>R</sub> en función de los parámetros <em>a</em> y <em>b</em>. El mínimo de esta superficie corresponde a los mejores valores de los parámetros.</figcaption>
-        </figure>
+        <!-- Figura 2: superficie de respuesta -->
+        <div class="figura-container">
+          <img src="imagenes/figura2.png"
+               alt="Superficie de respuesta SSR en función de los parámetros a y b">
+          <p class="figura-caption">
+            Figura 2 (Caceci &amp; Cacheris, 1984). Representación de la superficie de respuesta SS<sub>R</sub> en función de los parámetros <em>a</em> y <em>b</em>. El mínimo de esta superficie corresponde a los mejores valores de los parámetros.
+          </p>
+        </div>
 
         <p>
           El algoritmo funciona evaluando la función objetivo en cada vértice del simplex y realizando
@@ -107,65 +109,61 @@
           encuentra el mínimo. Estos movimientos son cuatro:
         </p>
 
-        <!-- Botones interactivos para los movimientos -->
-        <div class="movimientos-contenedor">
-          <p><strong>Haz clic en cada movimiento para ver su explicación:</strong></p>
+        <!-- Botones interactivos para los movimientos del Simplex -->
+        <p><strong>Haz clic en cada movimiento para ver su explicación:</strong></p>
 
-          <div class="movimiento-item">
-            <button class="boton btn-movimiento" data-panel="panel-reflexion">
-              1. Reflexión
-            </button>
-            <div id="panel-reflexion" class="panel-detalle panel-movimiento">
-              <strong>Reflexión:</strong> Se toma el peor vértice del simplex (el que tiene el valor
-              más alto de la función objetivo) y se refleja a través del centroide de los demás
-              vértices. Es como "empujar" el peor punto hacia el lado opuesto del simplex, esperando
-              encontrar una mejor solución. Es el movimiento más básico y frecuente.
-            </div>
-          </div>
-
-          <div class="movimiento-item">
-            <button class="boton btn-movimiento" data-panel="panel-expansion">
-              2. Expansión
-            </button>
-            <div id="panel-expansion" class="panel-detalle panel-movimiento">
-              <strong>Expansión:</strong> Si la reflexión produjo un resultado muy bueno (mejor que
-              el mejor vértice actual), se intenta ir más lejos en la misma dirección. El simplex se
-              "estira" para explorar si aún más adelante hay una solución todavía mejor. Es un
-              movimiento optimista que permite acelerar la convergencia.
-            </div>
-          </div>
-
-          <div class="movimiento-item">
-            <button class="boton btn-movimiento" data-panel="panel-contraccion">
-              3. Contracción
-            </button>
-            <div id="panel-contraccion" class="panel-detalle panel-movimiento">
-              <strong>Contracción:</strong> Si la reflexión no mejoró la situación, se contrae el
-              simplex acercando el peor vértice hacia el centroide. El simplex se "encoge"
-              parcialmente, reduciendo su tamaño para buscar con más detalle en la zona actual. Se
-              usa cuando el simplex ya está cerca del mínimo.
-            </div>
-          </div>
-
-          <div class="movimiento-item">
-            <button class="boton btn-movimiento" data-panel="panel-contraccion-total">
-              4. Contracción total
-            </button>
-            <div id="panel-contraccion-total" class="panel-detalle panel-movimiento">
-              <strong>Contracción total (shrink):</strong> Cuando ninguno de los movimientos
-              anteriores funciona, todos los vértices se acercan hacia el mejor vértice actual. El
-              simplex se reduce de tamaño drásticamente. Es un último recurso que se aplica pocas
-              veces durante la optimización, pero garantiza que el algoritmo no diverge.
-            </div>
-          </div>
+        <div class="movimientos-container">
+          <button type="button" class="btn-movimiento" id="btn-reflexion" data-panel="panel-reflexion">
+            1. Reflexión
+          </button>
+          <button type="button" class="btn-movimiento" id="btn-expansion" data-panel="panel-expansion">
+            2. Expansión
+          </button>
+          <button type="button" class="btn-movimiento" id="btn-contraccion" data-panel="panel-contraccion">
+            3. Contracción
+          </button>
+          <button type="button" class="btn-movimiento" id="btn-contraccion-total" data-panel="panel-contraccion-total">
+            4. Contracción total
+          </button>
         </div>
 
-        <!-- Figura: movimientos del simplex -->
-        <figure class="figura">
-          <img src="imagenes/simplex_movimientos.jpeg"
+        <!-- Contenido desplegable organizado justo después de los botones -->
+        <div id="panel-reflexion" class="contenido-oculto">
+          <strong>Reflexión:</strong> Se toma el peor vértice del simplex (el que tiene el valor
+          más alto de la función objetivo) y se refleja a través del centroide de los demás
+          vértices. Es como "empujar" el peor punto hacia el lado opuesto del simplex, esperando
+          encontrar una mejor solución. Es el movimiento más básico y frecuente.
+        </div>
+
+        <div id="panel-expansion" class="contenido-oculto">
+          <strong>Expansión:</strong> Si la reflexión produjo un resultado muy bueno (mejor que
+          el mejor vértice actual), se intenta ir más lejos en la misma dirección. El simplex se
+          "estira" para explorar si aún más adelante hay una solución todavía mejor. Es un
+          movimiento optimista que permite acelerar la convergencia.
+        </div>
+
+        <div id="panel-contraccion" class="contenido-oculto">
+          <strong>Contracción:</strong> Si la reflexión no mejoró la situación, se contrae el
+          simplex acercando el peor vértice hacia el centroide. El simplex se "encoge"
+          parcialmente, reduciendo su tamaño para buscar con más detalle en la zona actual. Se
+          usa cuando el simplex ya está cerca del mínimo.
+        </div>
+
+        <div id="panel-contraccion-total" class="contenido-oculto">
+          <strong>Contracción total (shrink):</strong> Cuando ninguno de los movimientos
+          anteriores funciona, todos los vértices se acercan hacia el mejor vértice actual. El
+          simplex se reduce de tamaño drásticamente. Es un último recurso que se aplica pocas
+          veces durante la optimización, pero garantiza que el algoritmo no diverge.
+        </div>
+
+        <!-- Figura 3: movimientos del simplex -->
+        <div class="figura-container">
+          <img src="imagenes/figura3.png"
                alt="Diagrama de un simplex bidimensional mostrando los cuatro movimientos: reflexión (R), expansión (E), contracción (C) y contracción total (S)">
-          <figcaption>Figura 3 (Caceci &amp; Cacheris, 1984). Simplex bidimensional BWO ilustrando los cuatro mecanismos de movimiento: reflexión, expansión, contracción y contracción total. B = mejor vértice, W = peor vértice, R = vértice reflejado, E = vértice expandido, C = vértice contraído, S = vértices de contracción total.</figcaption>
-        </figure>
+          <p class="figura-caption">
+            Figura 3 (Caceci &amp; Cacheris, 1984). Simplex bidimensional BWO ilustrando los cuatro mecanismos de movimiento: reflexión, expansión, contracción y contracción total. B = mejor vértice, W = peor vértice, R = vértice reflejado, E = vértice expandido, C = vértice contraído, S = vértices de contracción total.
+          </p>
+        </div>
 
         <h4 class="subtitulo">Ventajas del algoritmo Simplex</h4>
         <ul>
@@ -233,16 +231,20 @@
 
         <!-- Figuras: curvas ROC del artículo de Tejada -->
         <div class="figuras-grid">
-          <figure class="figura">
+          <div class="figura-container">
             <img src="imagenes/renal_p5_img1.png"
                  alt="Curvas ROC comparando el rendimiento de los cuatro modelos de machine learning para enfermedad renal crónica">
-            <figcaption>Figura 1 (Tejada, 2025). Curvas ROC de los modelos iniciales: SVM (AUC=0.92), Bosque Aleatorio (AUC=0.90), Regresión Logística (AUC=0.85) y Árbol de Decisiones (AUC=0.68).</figcaption>
-          </figure>
-          <figure class="figura">
+            <p class="figura-caption">
+              Figura 1 (Tejada, 2025). Curvas ROC de los modelos iniciales: SVM (AUC=0.92), Bosque Aleatorio (AUC=0.90), Regresión Logística (AUC=0.85) y Árbol de Decisiones (AUC=0.68).
+            </p>
+          </div>
+          <div class="figura-container">
             <img src="imagenes/renal_p6_img2.png"
                  alt="Curvas ROC comparando el rendimiento de los modelos de árbol de decisiones según su nivel de optimización">
-            <figcaption>Figura 2 (Tejada, 2025). Mejora progresiva del modelo de Árbol de Decisiones mediante optimización de hiperparámetros, alcanzando AUC=1.0 con técnicas avanzadas.</figcaption>
-          </figure>
+            <p class="figura-caption">
+              Figura 2 (Tejada, 2025). Mejora progresiva del modelo de Árbol de Decisiones mediante optimización de hiperparámetros, alcanzando AUC=1.0 con técnicas avanzadas.
+            </p>
+          </div>
         </div>
 
         <div class="tabla-contenedor">
@@ -322,12 +324,14 @@
           toma de decisiones clínicas.
         </div>
 
-        <!-- Figura: árbol de decisiones -->
-        <figure class="figura">
+        <!-- Figura 3: árbol de decisiones -->
+        <div class="figura-container">
           <img src="imagenes/renal_p7_img3.png"
                alt="Árbol de decisiones optimizado para clasificación de enfermedad renal crónica, mostrando las variables sexo masculino, hipertensión arterial, consumo de frutas/verduras y exposición a plaguicidas">
-          <figcaption>Figura 3 (Tejada, 2025). Árbol de decisiones con optimización de hiperparámetros. Las variables principales de decisión son: sexo masculino, hipertensión arterial, consumo de frutas y verduras, y exposición crónica a plaguicidas.</figcaption>
-        </figure>
+          <p class="figura-caption">
+            Figura 3 (Tejada, 2025). Árbol de decisiones con optimización de hiperparámetros. Las variables principales de decisión son: sexo masculino, hipertensión arterial, consumo de frutas y verduras, y exposición crónica a plaguicidas.
+          </p>
+        </div>
 
         <h4 class="subtitulo">Factores determinantes identificados</h4>
         <p>
@@ -376,12 +380,14 @@
 
         <h4 class="subtitulo">Modelos evaluados</h4>
 
-        <!-- Figura: diagrama de flujo del procesamiento de datos -->
-        <figure class="figura">
+        <!-- Figura 1: diagrama de flujo del procesamiento de datos -->
+        <div class="figura-container">
           <img src="imagenes/ml_p6_img2.png"
                alt="Diagrama de flujo del procesamiento de datos clínicos: desde 1647 registros iniciales, eliminación de duplicados, preprocesado, generación de datos sintéticos, hasta la división train/test">
-          <figcaption>Figura 1 (Rodríguez Núñez, 2025). Diagrama de flujo del procesamiento de datos clínicos: desde la recopilación inicial de 1,647 registros hasta la división en conjuntos de entrenamiento (80%) y prueba (20%).</figcaption>
-        </figure>
+          <p class="figura-caption">
+            Figura 1 (Rodríguez Núñez, 2025). Diagrama de flujo del procesamiento de datos clínicos: desde la recopilación inicial de 1,647 registros hasta la división en conjuntos de entrenamiento (80%) y prueba (20%).
+          </p>
+        </div>
 
         <p>
           El estudio evaluó seis modelos de machine learning para predecir si el microorganismo
@@ -403,17 +409,22 @@
 
         <!-- Figuras: curvas ROC y matrices de confusión -->
         <div class="figuras-grid">
-          <figure class="figura">
+          <div class="figura-container">
             <img src="imagenes/ml_p8_img3.png"
                  alt="Curvas ROC de los cuatro modelos base: Regresión Logística, Random Forest, XGBoost y CatBoost para detección de MRA">
-            <figcaption>Figura 2 (Rodríguez Núñez, 2025). Curvas ROC de los modelos base para detección de MRA: CatBoost (AUC=0.72) tiene el mejor desempeño, seguido de XGBoost y RF (AUC=0.70).</figcaption>
-          </figure>
-          <figure class="figura">
+            <p class="figura-caption">
+              Figura 2 (Rodríguez Núñez, 2025). Curvas ROC de los modelos base para detección de MRA: CatBoost (AUC=0.72) tiene el mejor desempeño, seguido de XGBoost y RF (AUC=0.70).
+            </p>
+          </div>
+          <div class="figura-container">
             <img src="imagenes/ml_p8_img5.png"
                  alt="Matrices de confusión de los modelos Regresión Logística y Random Forest con umbral 0.2">
-            <figcaption>Figura 2b (Rodríguez Núñez, 2025). Matrices de confusión de Regresión Logística y Random Forest con umbral 0.2, mostrando la distribución de verdaderos/falsos positivos y negativos.</figcaption>
-          </figure>
+            <p class="figura-caption">
+              Figura 2b (Rodríguez Núñez, 2025). Matrices de confusión de Regresión Logística y Random Forest con umbral 0.2, mostrando la distribución de verdaderos/falsos positivos y negativos.
+            </p>
+          </div>
         </div>
+
         <div class="tabla-contenedor">
           <table>
             <thead>
@@ -489,23 +500,30 @@
 
         <!-- Figuras: importancia de variables y curvas ROC del stacking -->
         <div class="figuras-grid">
-          <figure class="figura">
+          <div class="figura-container">
             <img src="imagenes/ml_p9_img9.png"
                  alt="Gráfico de importancia de variables del modelo XGBoost mostrando que NUM_ATB (número de antibióticos previos) es la variable más importante">
-            <figcaption>Figura 4 (Rodríguez Núñez, 2025). Importancia de variables por permutación en XGBoost: el número de antibióticos previos (NUM_ATB) es el predictor dominante de resistencia.</figcaption>
-          </figure>
-          <figure class="figura">
+            <p class="figura-caption">
+              Figura 4 (Rodríguez Núñez, 2025). Importancia de variables por permutación en XGBoost: el número de antibióticos previos (NUM_ATB) es el predictor dominante de resistencia.
+            </p>
+          </div>
+          <div class="figura-container">
             <img src="imagenes/ml_p10_img13.png"
                  alt="Importancia de variables del modelo Stacking 3c mostrando NUM_ATB, edad y días de ingreso como las tres variables principales">
-            <figcaption>Figura 5 (Rodríguez Núñez, 2025). Importancia de variables en Stacking 3c: NUM_ATB, edad y días de ingreso son las variables más relevantes para predecir MRA.</figcaption>
-          </figure>
+            <p class="figura-caption">
+              Figura 5 (Rodríguez Núñez, 2025). Importancia de variables en Stacking 3c: NUM_ATB, edad y días de ingreso son las variables más relevantes para predecir MRA.
+            </p>
+          </div>
         </div>
 
-        <figure class="figura">
+        <div class="figura-container">
           <img src="imagenes/ml_p10_img15.png"
                alt="Curvas ROC comparando los modelos Stacking 3c (AUC=0.70) y Stacking 4c (AUC=0.71) para detección de MRA">
-          <figcaption>Figura 6 (Rodríguez Núñez, 2025). Curvas ROC de los modelos Stacking: Stacking 3c (AUC=0.70) vs Stacking 4c (AUC=0.71). Aunque el 4c tiene un AUC ligeramente mayor, el 3c es preferido por su mayor sensibilidad.</figcaption>
-        </figure>
+          <p class="figura-caption">
+            Figura 6 (Rodríguez Núñez, 2025). Curvas ROC de los modelos Stacking: Stacking 3c (AUC=0.70) vs Stacking 4c (AUC=0.71). Aunque el 4c tiene un AUC ligeramente mayor, el 3c es preferido por su mayor sensibilidad.
+          </p>
+        </div>
+
         <p>
           El modelo <strong>Stacking 3c</strong> fue seleccionado como el más adecuado para uso
           clínico, ya que prioriza la <strong>sensibilidad (recall = 0.70)</strong> sobre la
